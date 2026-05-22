@@ -1,1 +1,275 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --accent: #00e5a0;
+  --glass-bg: rgba(15, 23, 42, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f1f5f9;
+  --text-secondary: rgba(241, 245, 249, 0.55);
+  --input-bg: rgba(15, 23, 42, 0.65);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ── Background ──────────────────────────────────── */
+.app-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.app-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.35) saturate(1.2);
+  transform: scale(1.05);
+  z-index: 0;
+}
+
+.app-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(15, 32, 39, 0.92) 0%,
+    rgba(32, 58, 67, 0.78) 50%,
+    rgba(44, 83, 100, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+/* ── Converter Card ──────────────────────────────── */
+.converter-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 460px;
+  padding: 2.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* ── Header ──────────────────────────────────────── */
+.card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.card-header .logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent) 0%, #00b8d4 100%);
+  margin-bottom: 0.75rem;
+}
+
+.card-header .logo-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #0f2027;
+}
+
+.card-header h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.card-header p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* ── Input Row ───────────────────────────────────── */
+.input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  padding: 1rem 1.15rem;
+  transition: border-color 0.25s ease;
+}
+
+.input-row:focus-within {
+  border-color: rgba(0, 229, 160, 0.3);
+}
+
+.input-row .amount-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.input-row .amount-section label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.input-row .amount-section input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  caret-color: var(--accent);
+}
+
+.input-row .amount-section input::placeholder {
+  color: rgba(241, 245, 249, 0.2);
+  font-weight: 400;
+}
+
+.input-row .amount-section input:disabled {
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.input-row .amount-section input[type='number']::-webkit-outer-spin-button,
+.input-row .amount-section input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-row .amount-section input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.input-row .currency-section {
+  flex-shrink: 0;
+}
+
+.input-row .currency-section p {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+  text-align: right;
+}
+
+.input-row .currency-section select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(0, 229, 160, 0.1);
+  border: 1px solid rgba(0, 229, 160, 0.2);
+  border-radius: 0.6rem;
+  padding: 0.45rem 2rem 0.45rem 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2300e5a0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+}
+
+.input-row .currency-section select option {
+  background: #1e293b;
+  color: var(--text-primary);
+}
+
+/* ── Swap Button ─────────────────────────────────── */
+.swap-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 0;
+  z-index: 20;
+}
+
+.swap-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(15, 23, 42, 0.8);
+  background: linear-gradient(135deg, var(--accent) 0%, #00b8d4 100%);
+  color: #0f2027;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.swap-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Convert Button ──────────────────────────────── */
+.convert-btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.95rem 1.5rem;
+  border: none;
+  border-radius: 0.85rem;
+  background: linear-gradient(135deg, var(--accent) 0%, #00b8d4 100%);
+  color: #0f2027;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 520px) {
+  .converter-card {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .input-row .currency-section p {
+    text-align: left;
+  }
+
+  .input-row .currency-section select {
+    width: 100%;
+  }
+}
